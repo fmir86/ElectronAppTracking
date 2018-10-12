@@ -5,7 +5,7 @@ const Tracking = {
     init: () => {
 
         const storeName = "DataStorage";          // Name of the JSON Storage.
-        const reportName = "HPS Tracking Report";    // Name of the Tracking Report.
+        const reportName = "My Tracking Report";    // Name of the Tracking Report.
  
         const {app, ipcMain} = electron;
         const fs = require("fs");
