@@ -69,7 +69,6 @@ const Tracking = {
                 userReport += `\r\nKind: '${kind}'\r\n\r\n`;
 
                 currentContent.forEach( (elem)=> {
-                    console.log(elem.name, kind);
                     if(elem.kind == kind){
                         userReport += ` - '${elem.name}':  ${elem.count} times.\r\n`;
                     }
