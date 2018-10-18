@@ -5,7 +5,7 @@ const Tracking = {
     init: () => {
 
         const storeName = "DataStorage";          // Name of the JSON Storage.
-        const reportName = "HPS Tracking Report";    // Name of the Tracking Report.
+        const reportName = "Your Tracking Report";    // Name of the Tracking Report.
  
         const {app, ipcMain} = electron;
         const fs = require("fs");
@@ -56,9 +56,26 @@ const Tracking = {
         function generateUserReport(){
             userReport = `${reportName}:\r\n\r\n`;
 
-            currentContent.forEach( (elem)=> {
-                userReport += `${elem.name} [kind: ${elem.kind}]:  ${elem.count} views.\r\n`;
-            })
+            var kindsArray = [];
+            
+            currentContent.forEach(  (elem) => {
+                if(kindsArray.indexOf(elem.kind) == -1){
+                    kindsArray.push( elem.kind );
+                }
+            });
+
+            kindsArray.forEach(function(kind){
+
+                userReport += `\r\nKind: '${kind}'\r\n\r\n`;
+
+                currentContent.forEach( (elem)=> {
+                    console.log(elem.name, kind);
+                    if(elem.kind == kind){
+                        userReport += ` - '${elem.name}':  ${elem.count} times.\r\n`;
+                    }
+                })
+    
+            });
 
             fs.writeFile(userReportPath, userReport, err => {
                 err ? console.log(err) : console.log("User Report created");
